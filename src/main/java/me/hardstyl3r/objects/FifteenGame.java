@@ -3,20 +3,20 @@ package me.hardstyl3r.objects;
 public class FifteenGame {
     private final int x;
     private final int y;
-    private final int[][] board;
+    private final int[] board;
 
     public FifteenGame(int x, int y) {
         this.x = x;
         this.y = y;
-        this.board = new int[x][y];
+        this.board = new int[x * y];
     }
 
-    public void setBoard(int x, int y, int i) {
-        board[x][y] = i;
+    public void setBoard(int position, int value) {
+        board[position] = value;
     }
 
-    public int getOnBoard(int x, int y) {
-        return this.board[x][y];
+    public int getOnBoard(int position) {
+        return this.board[position];
     }
 
     public int getX() {
