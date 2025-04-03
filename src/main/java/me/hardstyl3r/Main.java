@@ -1,7 +1,7 @@
-package org.example;
+package me.hardstyl3r;
 
-import org.example.managers.FifteenManager;
-import org.example.objects.FifteenGame;
+import me.hardstyl3r.managers.FifteenManager;
+import me.hardstyl3r.objects.FifteenGame;
 
 import java.io.File;
 

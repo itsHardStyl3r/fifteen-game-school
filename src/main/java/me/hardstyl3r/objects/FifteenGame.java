@@ -1,4 +1,4 @@
-package org.example.objects;
+package me.hardstyl3r.objects;
 
 public class FifteenGame {
     private final int x;

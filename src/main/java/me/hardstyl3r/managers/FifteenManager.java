@@ -1,6 +1,6 @@
-package org.example.managers;
+package me.hardstyl3r.managers;
 
-import org.example.objects.FifteenGame;
+import me.hardstyl3r.objects.FifteenGame;
 
 import java.io.File;
 import java.util.Scanner;
