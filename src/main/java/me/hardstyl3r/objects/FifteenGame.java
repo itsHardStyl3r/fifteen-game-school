@@ -15,6 +15,10 @@ public class FifteenGame {
         board[position] = value;
     }
 
+    public int[] getBoard() {
+        return this.board.clone();
+    }
+
     public int getOnBoard(int position) {
         return this.board[position];
     }

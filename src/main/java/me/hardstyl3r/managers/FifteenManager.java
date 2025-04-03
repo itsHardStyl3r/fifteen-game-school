@@ -40,7 +40,7 @@ public class FifteenManager {
     public String displayGame(FifteenGame game) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < game.getX() * game.getY(); i++) {
-            sb.append(game.getOnBoard(i)).append(" ");
+            sb.append(game.getOnBoard(i)).append("\t");
             if ((i + 1) % game.getY() == 0) sb.append("\n");
         }
         return sb.toString();
