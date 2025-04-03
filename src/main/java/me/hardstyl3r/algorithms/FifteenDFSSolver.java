@@ -26,7 +26,7 @@ public class FifteenDFSSolver {
 
     private String dfs(int[] currentBoard, String path, Set<String> visited, String order, int depth) {
         if (Arrays.equals(currentBoard, goalState)) return path;
-        if (depth >= MAX_DEPTH) return "DEPTH";
+        if (depth >= MAX_DEPTH) return null;
         String currentState = Arrays.toString(currentBoard);
         if (visited.contains(currentState)) return null;
         visited.add(currentState);
