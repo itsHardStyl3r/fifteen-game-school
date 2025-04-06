@@ -1,11 +1,13 @@
 package me.hardstyl3r.objects;
 
+import static me.hardstyl3r.Main.df;
+
 public class GameStat {
     private int solutionLength;
     private final int statesVisited;
     private final int statesProcessed;
     private final int maxRecursionDepth;
-    private final long timeElapsed;
+    private final float timeElapsed;
 
     public GameStat(int solutionLength, int statesVisited, int statesProcessed, int maxRecursionDepth, long timeElapsed) {
         this.solutionLength = solutionLength;
@@ -22,11 +24,23 @@ public class GameStat {
                 ", statesVisited=" + statesVisited +
                 ", statesProcessed=" + statesProcessed +
                 ", maxRecursionDepth=" + maxRecursionDepth +
-                ", timeElapsed=" + timeElapsed +
+                ", timeElapsed=" + getTimeInMillis() +
                 '}';
+    }
+
+    public String toFileDetails() {
+        return solutionLength + "\n" +
+                statesVisited + "\n" +
+                statesProcessed + "\n" +
+                maxRecursionDepth + "\n" +
+                getTimeInMillis() + "\n";
     }
 
     public void setSolutionLength(int solutionLength) {
         this.solutionLength = solutionLength;
+    }
+
+    public String getTimeInMillis() {
+        return df.format(timeElapsed / 1000f);
     }
 }
