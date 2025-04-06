@@ -1,5 +1,6 @@
 package me.hardstyl3r.algorithms;
 
+import me.hardstyl3r.Main;
 import me.hardstyl3r.objects.FifteenGame;
 import me.hardstyl3r.enums.Move;
 import me.hardstyl3r.objects.GameStat;
@@ -20,7 +21,7 @@ public class FifteenAStarSolver {
     }
 
     public String solveAStar(boolean useManhattan) {
-        long current = System.currentTimeMillis();
+        long current = System.nanoTime();
         boolean didFinish = false;
         String currentPath = "";
 
@@ -49,9 +50,7 @@ public class FifteenAStarSolver {
                 }
             }
         }
-
-        this.gameStat = new GameStat(-1, paths.size(), i, currentPath.length(),
-                System.currentTimeMillis() - current);
+        this.gameStat = new GameStat(-1, paths.size(), i, currentPath.length(), (System.nanoTime() - current));
         if (didFinish) {
             this.gameStat.setSolutionLength(currentPath.length());
             return currentPath;

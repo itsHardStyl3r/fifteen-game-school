@@ -1,5 +1,6 @@
 package me.hardstyl3r.algorithms;
 
+import me.hardstyl3r.Main;
 import me.hardstyl3r.objects.FifteenGame;
 import me.hardstyl3r.enums.Move;
 import me.hardstyl3r.objects.GameStat;
@@ -21,7 +22,7 @@ public class FifteenBFSSolver {
     }
 
     public String solveBFS(String order) {
-        long current = System.currentTimeMillis();
+        long current = System.nanoTime();
         boolean didFinish = false;
         String currentPath = "";
         int i = 0;
@@ -49,9 +50,7 @@ public class FifteenBFSSolver {
                 }
             }
         }
-
-        this.gameStat = new GameStat(-1, paths.size(), i, currentPath.length(),
-                System.currentTimeMillis() - current);
+        this.gameStat = new GameStat(-1, paths.size(), i, currentPath.length(), (System.nanoTime() - current));
         if (didFinish) {
             this.gameStat.setSolutionLength(currentPath.length());
             return currentPath;

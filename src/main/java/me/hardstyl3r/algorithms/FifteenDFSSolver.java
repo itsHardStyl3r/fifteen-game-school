@@ -1,5 +1,6 @@
 package me.hardstyl3r.algorithms;
 
+import me.hardstyl3r.Main;
 import me.hardstyl3r.objects.FifteenGame;
 import me.hardstyl3r.enums.Move;
 import me.hardstyl3r.objects.GameStat;
@@ -25,7 +26,7 @@ public class FifteenDFSSolver {
     }
 
     public String solveDFS(String order) {
-        long current = System.currentTimeMillis();
+        long current = System.nanoTime();
         boolean didFinish = false;
         String currentPath = "";
         int maxDepth = 0;
@@ -63,9 +64,7 @@ public class FifteenDFSSolver {
                 }
             }
         }
-
-        this.gameStat = new GameStat(-1, visited.size(), paths.size(), maxDepth,
-                System.currentTimeMillis() - current);
+        this.gameStat = new GameStat(-1, visited.size(), paths.size(), maxDepth, (System.nanoTime() - current));
         if (didFinish) {
             this.gameStat.setSolutionLength(currentPath.length());
             return currentPath;

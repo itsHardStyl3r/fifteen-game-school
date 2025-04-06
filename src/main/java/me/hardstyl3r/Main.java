@@ -45,20 +45,20 @@ public class Main {
                 for (String order : orders) {
                     String solution = bfsSolver.solveBFS(order);
                     String stats = bfsSolver.returnLatestStat().toFileDetails();
-                    manager.saveToFiles(path, "bfs", order.toLowerCase(), solution, stats);
+                    manager.saveToFiles(path, f.getName(), "bfs", order.toLowerCase(), solution, stats);
                 }
                 FifteenDFSSolver dfsSolver = new FifteenDFSSolver(game);
                 for (String order : orders) {
                     String solution = dfsSolver.solveDFS(order);
                     String stats = dfsSolver.returnLatestStat().toFileDetails();
-                    manager.saveToFiles(path, "dfs", order.toLowerCase(), solution, stats);
+                    manager.saveToFiles(path, f.getName(), "dfs", order.toLowerCase(), solution, stats);
                 }
                 FifteenAStarSolver aStarSolver = new FifteenAStarSolver(game);
                 for (String argument : arguments) {
                     boolean useManhattan = argument.equalsIgnoreCase("manh");
                     String solution = aStarSolver.solveAStar(useManhattan);
                     String stats = aStarSolver.returnLatestStat().toFileDetails();
-                    manager.saveToFiles(path, "astr", useManhattan ? "manh" : "hamm", solution, stats);
+                    manager.saveToFiles(path, f.getName(),  "astr", useManhattan ? "manh" : "hamm", solution, stats);
                 }
             }
             logger.info("Finished. (took " + (System.currentTimeMillis() - current) + "ms)");

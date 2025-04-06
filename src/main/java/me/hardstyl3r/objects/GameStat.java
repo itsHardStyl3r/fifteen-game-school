@@ -7,14 +7,14 @@ public class GameStat {
     private final int statesVisited;
     private final int statesProcessed;
     private final int maxRecursionDepth;
-    private final float timeElapsed;
+    private final long timeElapsedInNano;
 
-    public GameStat(int solutionLength, int statesVisited, int statesProcessed, int maxRecursionDepth, long timeElapsed) {
+    public GameStat(int solutionLength, int statesVisited, int statesProcessed, int maxRecursionDepth, long timeElapsedInNano) {
         this.solutionLength = solutionLength;
         this.statesVisited = statesVisited;
         this.statesProcessed = statesProcessed;
         this.maxRecursionDepth = maxRecursionDepth;
-        this.timeElapsed = timeElapsed;
+        this.timeElapsedInNano = timeElapsedInNano;
     }
 
     @Override
@@ -41,6 +41,6 @@ public class GameStat {
     }
 
     public String getTimeInMillis() {
-        return df.format(timeElapsed / 1000f);
+        return df.format(timeElapsedInNano / 1000000f);
     }
 }
