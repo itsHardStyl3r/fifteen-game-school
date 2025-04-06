@@ -138,3 +138,4 @@ buildNumber.properties
 
 games/**
 !puzzlegen.jar
+!puzzleval.jar

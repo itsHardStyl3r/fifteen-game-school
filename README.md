@@ -1,14 +1,19 @@
 # The Fifteen Puzzle game
 
+Whole project uses plain Java 21, but could be compiled with older ones as well.
+
+---
+
 First, you need to generate the puzzles. You can do so by running
 
 ```bash
-java -jar puzzlegen.jar
+java -jar ./extras/puzzlegen.jar
 ```
 
 ⚠️ Requires JavaFX 8, fails to run on JavaFX 21.
 
-ℹ️ This program has been provided by the author of the exercise. I do not claim any ownership over it.
+ℹ️ Programs puzzlegen.jar and puzzleval.jar have been provided by the author of the exercise. I do not claim any
+ownership over it.
 
 This will open a GUI where you can generate puzzles. It is recommended to create a new folder, e.g. `./games`
 and select it as a path in the GUI, because it will generate __copious__ amounts of files. The application should work
@@ -20,6 +25,39 @@ You should generate a puzzle with the following parameters:
 - depth: 7,
 
 to perform analytics later.
+
+## Validating the output
+
+To validate whether the puzzle was solved correctly, use
+
+```bash
+java -jar ./extras/puzzleval.jar <game_file> <solution_file>
+```
+
+⚠️ Requires JavaFX 8, fails to run on JavaFX 21.
+
+Examples:
+
+```bash
+java -jar ./extras/puzzleval.jar 4x4_01_00001.txt 4x4_01_00001_astr_hamm_sol.txt
+```
+
+```bash
+java -jar ./extras/puzzleval.jar 4x4_05_00047.txt 4x4_05_00047_bfs_DRUL_sol.txt
+```
+
+```bash
+java -jar ./extras/puzzleval.jar 4x4_05_00047.txt  4x4_05_00047_dfs_LUDR_sol.txt
+```
+
+There is also a script to do it in batch, but it takes notoriously long time (2+ hours) to check the solutions for the
+whole precompiled games. To run it, use:
+
+```bash
+./extras/runval.sh | tee runval.txt
+```
+
+There is already pregenerated `runval.txt` file in the repo.
 
 ## Generating data for a puzzle
 
@@ -95,3 +133,20 @@ java -jar <jar_file>.jar generate <path_to_puzzles>
 where `<path_to_puzzles>` is the path to the folder where the generated puzzles are stored. Program will override
 existing data files, but won't touch the game files. All supported algorithms will be run on each puzzle, and the
 results will be stored in the files, following the same naming convention as above in examples.
+
+You could also use the provided script
+
+```bash
+./extras/runprog.sh
+```
+
+but it simply makes no sense to run it, as it will take a lot longer time to finish, compared to the command above.
+
+Next, you need to create a summary file. To do so, run:
+
+```bash
+./extras/extdata.sh | tee summary.txt
+```
+
+and you'll end up with a new file `summary.txt` in the root folder. Keep in mind there is an already pregenerated file
+currently in the repo.
