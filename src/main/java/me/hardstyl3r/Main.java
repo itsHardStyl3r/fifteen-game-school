@@ -2,6 +2,7 @@ package me.hardstyl3r;
 
 import me.hardstyl3r.algorithms.FifteenAStarSolver;
 import me.hardstyl3r.algorithms.FifteenBFSSolver;
+import me.hardstyl3r.algorithms.FifteenDFSSolver;
 import me.hardstyl3r.managers.FifteenManager;
 import me.hardstyl3r.objects.FifteenGame;
 
@@ -21,6 +22,12 @@ public class Main {
         for (String s : orders) {
             System.out.println("BFS " + s + ": " + bfs.solveBFS(s));
         }
+        FifteenDFSSolver dfs = new FifteenDFSSolver(game);
+        System.out.println();
+        for (String s : orders) {
+            System.out.println("DFS " + s + ": " + dfs.solveDFS(s));
+        }
+        System.out.println();
         FifteenAStarSolver astar = new FifteenAStarSolver(game);
         System.out.println("A* Manhattan: " + astar.solveAStar(true));
         System.out.println("A* Hamming: " + astar.solveAStar(false));
