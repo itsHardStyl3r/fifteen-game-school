@@ -62,6 +62,7 @@ public class Main {
                 }
             }
             logger.info("Finished. (took " + (System.currentTimeMillis() - current) + "ms)");
+            return;
         }
         if (args.length != 5 && args.length != 3) {
             logger.log(Level.INFO, "Usage: java -jar <jar_file> <algorithm> <argument> <input_file> [solution_file] [stats_file]");
@@ -90,6 +91,7 @@ public class Main {
         }
         if (!Arrays.asList(orders).contains(argument) && !algorithm.equals("astr")) {
             logger.severe("Unknown order " + argument + ".");
+            return;
         }
         String solution = "";
         String stats = "";
