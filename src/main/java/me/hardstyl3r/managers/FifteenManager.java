@@ -20,8 +20,13 @@ public class FifteenManager {
             logger.severe("Failed to read file " + f.getAbsolutePath() + ": " + e.getMessage());
             return null;
         }
-        x = Integer.parseInt(text.getFirst().split(" ")[0]);
-        y = Integer.parseInt(text.getFirst().split(" ")[1]);
+        try {
+            x = Integer.parseInt(text.getFirst().split(" ")[0]);
+            y = Integer.parseInt(text.getFirst().split(" ")[1]);
+        } catch (Exception e) {
+            logger.severe("File " + f.getAbsolutePath() + " most likely is not the right format.");
+            return null;
+        }
         text.removeFirst();
         FifteenGame game = new FifteenGame(x, y);
         try {
