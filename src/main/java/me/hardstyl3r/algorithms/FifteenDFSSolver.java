@@ -2,6 +2,7 @@ package me.hardstyl3r.algorithms;
 
 import me.hardstyl3r.objects.FifteenGame;
 import me.hardstyl3r.enums.Move;
+import me.hardstyl3r.objects.GameStat;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -16,6 +17,7 @@ public class FifteenDFSSolver {
     private final FifteenGame game;
     private final int[] goalState;
     private final int MAX_DEPTH = 20;
+    private GameStat gameStat;
 
     public FifteenDFSSolver(FifteenGame game) {
         this.game = game;
@@ -23,19 +25,27 @@ public class FifteenDFSSolver {
     }
 
     public String solveDFS(String order) {
+        long current = System.currentTimeMillis();
+        boolean didFinish = false;
+        String currentPath = "";
+        int maxDepth = 0;
+
         Stack<int[]> stack = new Stack<>();
         Map<String, String> visited = new HashMap<>();
         Map<String, String> paths = new HashMap<>();
-
         stack.push(game.getBoard());
         visited.put(Arrays.toString(game.getBoard()), "");
         paths.put(Arrays.toString(game.getBoard()), "");
 
         while (!stack.isEmpty()) {
             int[] currentBoard = stack.pop();
-            String currentPath = paths.get(Arrays.toString(currentBoard));
+            currentPath = paths.get(Arrays.toString(currentBoard));
+            if (currentPath.length() > maxDepth) {
+                maxDepth = currentPath.length();
+            }
             if (Arrays.equals(currentBoard, goalState)) {
-                return currentPath;
+                didFinish = true;
+                break;
             }
             if (currentPath.length() >= MAX_DEPTH) {
                 continue;
@@ -53,6 +63,17 @@ public class FifteenDFSSolver {
                 }
             }
         }
+
+        this.gameStat = new GameStat(-1, visited.size(), paths.size(), maxDepth,
+                System.currentTimeMillis() - current);
+        if (didFinish) {
+            this.gameStat.setSolutionLength(currentPath.length());
+            return currentPath;
+        }
         return "DNF";
+    }
+
+    public GameStat returnLatestStat() {
+        return this.gameStat;
     }
 }
