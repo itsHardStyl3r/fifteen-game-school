@@ -150,3 +150,16 @@ Next, you need to create a summary file. To do so, run:
 
 and you'll end up with a new file `summary.txt` in the root folder. Keep in mind there is an already pregenerated file
 currently in the repo.
+
+### Generating plots
+
+You need to have the `summary.txt` file present. It's best to use provided python scripts, so:
+
+```bash
+python ./extras/plot.py
+```
+
+but you need pandas, matplotlib and seaborn. You can use Java to generate the plots, too, but it looks very outdated and
+was made just for fun. Anyway, just run Graph.main() if you need. Plot data was needed in polish, so expect to see it
+around here.
+
