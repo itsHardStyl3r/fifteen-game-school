@@ -18,13 +18,56 @@ public class Main {
     public static DecimalFormat df = new DecimalFormat("#.###");
 
     public static void main(String[] args) {
+        String[] orders = {"RDUL", "RDLU", "DRUL", "DRLU", "LUDR", "LURD", "ULDR", "ULRD"};
+        String[] arguments = {"manh", "hamm"};
+
+        if (args.length == 2 && args[0].equalsIgnoreCase("generate")) {
+            long current = System.currentTimeMillis();
+            File path = new File(args[1]);
+            File[] files = path.listFiles();
+            if (files == null || !path.isDirectory()) {
+                logger.severe("Invalid directory: " + args[1]);
+                return;
+            }
+
+            FifteenManager manager = new FifteenManager();
+            logger.info("Solving all files in " + path.getAbsolutePath() + "...");
+            for (File f : files) {
+                if (f.getName().length() != 16) continue;
+                FifteenGame game = manager.loadFromFile(f);
+                if (game == null) {
+                    logger.info("Skipping " + f.getName() + ".");
+                    continue;
+                }
+                System.out.println("Solving and saving " + f.getName() + "...");
+
+                FifteenBFSSolver bfsSolver = new FifteenBFSSolver(game);
+                for (String order : orders) {
+                    String solution = bfsSolver.solveBFS(order);
+                    String stats = bfsSolver.returnLatestStat().toFileDetails();
+                    manager.saveToFiles(path, "bfs", order.toLowerCase(), solution, stats);
+                }
+                FifteenDFSSolver dfsSolver = new FifteenDFSSolver(game);
+                for (String order : orders) {
+                    String solution = dfsSolver.solveDFS(order);
+                    String stats = dfsSolver.returnLatestStat().toFileDetails();
+                    manager.saveToFiles(path, "dfs", order.toLowerCase(), solution, stats);
+                }
+                FifteenAStarSolver aStarSolver = new FifteenAStarSolver(game);
+                for (String argument : arguments) {
+                    boolean useManhattan = argument.equalsIgnoreCase("manh");
+                    String solution = aStarSolver.solveAStar(useManhattan);
+                    String stats = aStarSolver.returnLatestStat().toFileDetails();
+                    manager.saveToFiles(path, "astr", useManhattan ? "manh" : "hamm", solution, stats);
+                }
+            }
+            logger.info("Finished. (took " + (System.currentTimeMillis() - current) + "ms)");
+        }
         if (args.length != 5 && args.length != 3) {
             logger.log(Level.INFO, "Usage: java -jar <jar_file> <algorithm> <argument> <input_file> [solution_file] [stats_file]");
             return;
         }
-        String[] orders = {"RDUL", "RDLU", "DRUL", "DRLU", "LUDR", "LURD", "ULDR", "ULRD"};
         String[] algorithms = {"bfs", "dfs", "astr"};
-        String[] arguments = {"manh", "hamm"};
         String algorithm = args[0];
         String argument = args[1];
         String inputFile = args[2];

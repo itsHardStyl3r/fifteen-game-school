@@ -2,8 +2,12 @@ package me.hardstyl3r.managers;
 
 import me.hardstyl3r.objects.FifteenGame;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -49,5 +53,31 @@ public class FifteenManager {
             if ((i + 1) % game.getY() == 0) sb.append("\n");
         }
         return sb.toString();
+    }
+
+    public void saveToFiles(File directory, String algorithm,
+                                    String strategy, String solution, String stats) {
+        String baseName = directory.getName().split(".txt")[0];
+        String solutionContent = solution.equals("DNF") ? "-1" : solution.length() + "\n" + solution;
+        String solFileName = String.format("%s_%s_%s_sol.txt", baseName, algorithm, strategy);
+        String statsFileName = String.format("%s_%s_%s_stats.txt", baseName, algorithm, strategy);
+
+        try {
+            // Zapis rozwiązania
+            Path solPath = Paths.get(directory.getAbsolutePath(), solFileName);
+            try (BufferedWriter writer = Files.newBufferedWriter(solPath,
+                    StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)) {
+                writer.write(solutionContent);
+            }
+
+            // Zapis statystyk
+            Path statsPath = Paths.get(directory.getAbsolutePath(), statsFileName);
+            try (BufferedWriter writer = Files.newBufferedWriter(statsPath,
+                    StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)) {
+                writer.write(stats);
+            }
+        } catch (Exception e) {
+            logger.severe(String.format("Failed to write files for %s: %s", baseName, e.getMessage()));
+        }
     }
 }
