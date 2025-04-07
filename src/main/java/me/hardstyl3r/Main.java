@@ -7,6 +7,7 @@ import me.hardstyl3r.managers.FifteenManager;
 import me.hardstyl3r.objects.FifteenGame;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.text.DecimalFormat;
 import java.util.Arrays;
@@ -122,12 +123,13 @@ public class Main {
                 break;
         }
         try {
-            Files.writeString(solutionFile.toPath(), solution.equals("DNF") ? "-1" : solution.length() + "\n" + solution);
+            String output = solution.equals("DNF") ? "-1" : solution.length() + "\n" + solution;
+            Files.write(solutionFile.toPath(), output.getBytes(StandardCharsets.UTF_8));
         } catch (Exception e) {
             logger.severe("Failed to write solution to file: " + e.getMessage());
         }
         try {
-            Files.writeString(statsFile.toPath(), stats);
+            Files.write(statsFile.toPath(), stats.getBytes(StandardCharsets.UTF_8));
         } catch (Exception e) {
             logger.severe("Failed to write stats to file: " + e.getMessage());
         }

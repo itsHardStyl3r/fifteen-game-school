@@ -12,12 +12,17 @@ public enum Move {
     }
 
     public static Move getMove(char c) {
-        return switch (c) {
-            case 'L' -> Move.LEFT;
-            case 'R' -> Move.RIGHT;
-            case 'U' -> Move.UP;
-            case 'D' -> Move.DOWN;
-            default -> throw new IllegalArgumentException("Invalid move");
-        };
+        switch (c) {
+            case 'L':
+                return Move.LEFT;
+            case 'R':
+                return Move.RIGHT;
+            case 'U':
+                return Move.UP;
+            case 'D':
+                return Move.DOWN;
+            default:
+                throw new IllegalArgumentException("Invalid move");
+        }
     }
 }

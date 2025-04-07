@@ -25,13 +25,13 @@ public class FifteenManager {
             return null;
         }
         try {
-            x = Integer.parseInt(text.getFirst().split(" ")[0]);
-            y = Integer.parseInt(text.getFirst().split(" ")[1]);
+            x = Integer.parseInt(text.get(0).split(" ")[0]);
+            y = Integer.parseInt(text.get(0).split(" ")[1]);
         } catch (Exception e) {
             logger.severe("File " + f.getAbsolutePath() + " most likely is not the right format.");
             return null;
         }
-        text.removeFirst();
+        text.remove(0);
         FifteenGame game = new FifteenGame(x, y);
         try {
             int index = 0;

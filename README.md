@@ -1,6 +1,6 @@
 # The Fifteen Puzzle game
 
-Whole project uses plain Java 21, but could be compiled with older ones as well.
+Originally planned to use Java 21, but since the provided programs can't run on it, I had to downgrade to Java 8.
 
 ---
 
@@ -10,7 +10,7 @@ First, you need to generate the puzzles. You can do so by running
 java -jar ./extras/puzzlegen.jar
 ```
 
-⚠️ Requires JavaFX 8, fails to run on JavaFX 21.
+⚠️ Requires JavaFX 8.
 
 ℹ️ Programs puzzlegen.jar and puzzleval.jar have been provided by the author of the exercise. I do not claim any
 ownership over it.
@@ -34,7 +34,7 @@ To validate whether the puzzle was solved correctly, use
 java -jar ./extras/puzzleval.jar <game_file> <solution_file>
 ```
 
-⚠️ Requires JavaFX 8, fails to run on JavaFX 21.
+⚠️ Requires JavaFX 8.
 
 Examples:
 

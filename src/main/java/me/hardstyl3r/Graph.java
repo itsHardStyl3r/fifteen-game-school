@@ -62,7 +62,7 @@ public class Graph {
                 .filter(e -> e.dlugoscRozwiazania != -1)
                 .collect(Collectors.groupingBy(e -> e.glebokosc));
 
-        for (var entry : grouped.entrySet()) {
+        for (Map.Entry<Integer, List<Entry>> entry : grouped.entrySet()) {
             int g = entry.getKey();
             List<Entry> list = entry.getValue();
 
@@ -72,15 +72,15 @@ public class Graph {
             dataset1.addValue(avg(list, criterion, "astr", null), "A*", String.valueOf(g));
 
             // Średnie BFS - porządki
-            for (String strat : List.of("DRLU", "DRUL", "LUDR", "LURD", "RDLU", "RDUL", "ULDR", "ULRD"))
+            for (String strat : Arrays.asList("DRLU", "DRUL", "LUDR", "LURD", "RDLU", "RDUL", "ULDR", "ULRD"))
                 dataset2.addValue(avg(list, criterion, "bfs", strat), strat, String.valueOf(g));
 
             // Średnie DFS - porządki
-            for (String strat : List.of("DRLU", "DRUL", "LUDR", "LURD", "RDLU", "RDUL", "ULDR", "ULRD"))
+            for (String strat : Arrays.asList("DRLU", "DRUL", "LUDR", "LURD", "RDLU", "RDUL", "ULDR", "ULRD"))
                 dataset3.addValue(avg(list, criterion, "dfs", strat), strat, String.valueOf(g));
 
             // Średnie A* - heurystyki
-            for (String strat : List.of("hamm", "manh"))
+            for (String strat : Arrays.asList("hamm", "manh"))
                 dataset4.addValue(avg(list, criterion, "astr", strat), strat, String.valueOf(g));
         }
 
@@ -114,13 +114,23 @@ public class Graph {
         return list.stream()
                 .filter(e -> e.algorytm.equalsIgnoreCase(alg))
                 .filter(e -> strat == null || e.strategia.equalsIgnoreCase(strat))
-                .mapToDouble(e -> switch (criterion) {
-                    case "dlugosc" -> e.dlugoscRozwiazania;
-                    case "odwiedzone" -> e.odwiedzone;
-                    case "przetworzone" -> e.przetworzone;
-                    case "glebokosc_maks" -> e.maksGlebokosc;
-                    case "czas" -> e.czasMs;
-                    default -> 0;
-                }).average().orElse(0);
+                .mapToDouble(e -> {
+                    switch (criterion) {
+                        case "dlugosc":
+                            return e.dlugoscRozwiazania;
+                        case "odwiedzone":
+                            return e.odwiedzone;
+                        case "przetworzone":
+                            return e.przetworzone;
+                        case "glebokosc_maks":
+                            return e.maksGlebokosc;
+                        case "czas":
+                            return e.czasMs;
+                        default:
+                            return 0;
+                    }
+                })
+                .average()
+                .orElse(0);
     }
 }
