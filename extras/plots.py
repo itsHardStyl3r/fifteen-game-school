@@ -39,7 +39,7 @@ def generuj_wykresy_svg(kryterium, tytul):
     data1 = df.groupby(["głębokość", "algorytm_kategoria"])[kryterium].mean().reset_index()
     plt.figure(figsize=(8, 6))
     sns.barplot(data=data1, x="głębokość", y=kryterium, hue="algorytm_kategoria")
-    plt.title(f"{tytul} – BFS / DFS / A*")
+    # plt.title(f"{tytul} – BFS / DFS / A*")
     plt.ylabel(tytul)
     plt.savefig(f"plots/{kryterium}_bfs_dfs_astar.svg", format="svg")
     plt.close()
@@ -49,7 +49,7 @@ def generuj_wykresy_svg(kryterium, tytul):
     if not data2.empty:
         plt.figure(figsize=(8, 6))
         sns.barplot(data=data2, x="głębokość", y=kryterium, hue="strategia")
-        plt.title(f"{tytul} – A* heurystyki")
+        # plt.title(f"{tytul} – A* heurystyki")
         plt.ylabel(tytul)
         plt.savefig(f"plots/{kryterium}_astar_vs_heurystyka.svg", format="svg")
         plt.close()
@@ -59,7 +59,7 @@ def generuj_wykresy_svg(kryterium, tytul):
     if not data3.empty:
         plt.figure(figsize=(8, 6))
         sns.barplot(data=data3, x="głębokość", y=kryterium, hue="strategia")
-        plt.title(f"{tytul} – BFS porządki")
+        # plt.title(f"{tytul} – BFS porządki")
         plt.ylabel(tytul)
         plt.savefig(f"plots/{kryterium}_bfs_vs_porządki.svg", format="svg")
         plt.close()
@@ -69,7 +69,7 @@ def generuj_wykresy_svg(kryterium, tytul):
     if not data4.empty:
         plt.figure(figsize=(8, 6))
         sns.barplot(data=data4, x="głębokość", y=kryterium, hue="strategia")
-        plt.title(f"{tytul} – DFS porządki")
+        # plt.title(f"{tytul} – DFS porządki")
         plt.ylabel(tytul)
         plt.savefig(f"plots/{kryterium}_dfs_vs_porządki.svg", format="svg")
         plt.close()

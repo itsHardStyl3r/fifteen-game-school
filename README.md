@@ -2,6 +2,8 @@
 
 Originally planned to use Java 21, but since the provided programs can't run on it, I had to downgrade to Java 8.
 
+📖 Read the report in polish: [sprawozdanie.pdf](report/sprawozdanie.pdf).
+
 ---
 
 First, you need to generate the puzzles. You can do so by running
